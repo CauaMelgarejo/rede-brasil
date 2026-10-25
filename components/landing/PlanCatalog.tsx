@@ -16,11 +16,16 @@ export function PlanCatalog({ plans }: PlanCatalogProps) {
 
   const filteredPlans = useMemo(() => {
     if (activeFilter === "Todos") return plans;
-    return plans.filter((plan) => plan.category === activeFilter);
+    return plans.filter((plan) =>
+      plan.modalities.includes(activeFilter),
+    );
   }, [activeFilter, plans]);
 
   return (
-    <section className="bg-[#F5F5F5] px-4 py-8 sm:px-6 lg:px-8">
+    <section
+      id="planos"
+      className="scroll-mt-6 bg-[#F5F5F5] px-4 py-8 sm:px-6 lg:px-8"
+    >
       <div className="mx-auto max-w-[1280px]">
         <div className="mb-6 flex flex-wrap gap-3">
           {categories.map((category) => {

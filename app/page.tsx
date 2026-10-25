@@ -1,4 +1,3 @@
-import Image from "next/image";
 import {
   BadgeCheck,
   BriefcaseMedical,
@@ -7,11 +6,11 @@ import {
   UserRound,
 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import { SiteHeader } from "@/components/layout/SiteHeader";
 import { PlanCarousel } from "@/components/landing/PlanCarousel";
 import { PlanCatalog } from "@/components/landing/PlanCatalog";
+import { AboutBroker } from "@/components/landing/AboutBroker";
 import type { PlanCardData } from "@/components/landing/PlanCard";
-
-const navigation = ["Inicio", "Planos", "Como funciona", "Sobre nós", "FAQ"];
 
 const reasons = [
   {
@@ -38,68 +37,85 @@ const reasons = [
 
 const plans: PlanCardData[] = [
   {
-    id: "bradesco-individual",
-    name: "Bradesco",
-    logo: "/images/logo-bradesco-hero%201.png",
-    category: "Individual",
-    description: "Conheça as opções disponíveis e descubra quais modalidades podem atender ao seu perfil.",
-    href: "#",
+    id: "medsenior",
+    name: "MedSênior",
+    logo: "/images/medSenior.png",
+    modalities: ["Individual", "Empresarial"],
+    description:
+      "Planos de saúde voltados ao público sênior, com opções para diferentes necessidades de cuidado e assistência. Conheça as modalidades disponíveis e encontre uma alternativa alinhada ao seu perfil.",
+    href: "/planos/medsenior",
   },
   {
-    id: "bradesco-empresarial",
-    name: "Bradesco",
-    logo: "/images/logo-bradesco-hero%201.png",
-    category: "Empresarial",
-    description: "Conheça as opções disponíveis e descubra quais modalidades podem atender ao seu perfil.",
-    href: "#",
+    id: "hapvida",
+    name: "Hapvida",
+    logo: "/images/hapvida.png",
+    modalities: ["Individual", "Empresarial"],
+    description:
+      "Encontre opções de planos de saúde para você, sua família ou sua empresa. Consulte as alternativas disponíveis e compare modalidades de contratação, coberturas e condições.",
+    href: "/planos/hapvida",
   },
   {
-    id: "amil-individual",
+    id: "doctor-clin",
+    name: "Doctor Clin",
+    logo: "/images/doctorclin.png",
+    modalities: ["Empresarial", "Adesão"],
+    description:
+      "Conheça as opções de assistência à saúde da Doctor Clin e avalie as alternativas disponíveis para empresas e para beneficiários elegíveis à modalidade por adesão.",
+    href: "/planos/doctor-clin",
+  },
+  {
+    id: "amil",
     name: "Amil",
     logo: "/images/amil-logo.png",
-    category: "Individual",
-    description: "Conheça as opções disponíveis e descubra quais modalidades podem atender ao seu perfil.",
-    href: "#",
+    modalities: ["Empresarial"],
+    description:
+      "Descubra alternativas de planos de saúde empresariais para sua organização. Consulte as opções disponíveis e encontre uma configuração compatível com o perfil da empresa e de seus colaboradores.",
+    href: "/planos/amil",
   },
   {
-    id: "amil-empresarial",
-    name: "Amil",
-    logo: "/images/amil-logo.png",
-    category: "Empresarial",
-    description: "Conheça as opções disponíveis e descubra quais modalidades podem atender ao seu perfil.",
-    href: "#",
+    id: "bradesco-saude",
+    name: "Bradesco Saúde",
+    logo: "/images/logo-bradesco-hero%201.png",
+    modalities: ["Empresarial"],
+    description:
+      "Explore as opções de planos empresariais Bradesco Saúde e conheça as alternativas de cobertura e contratação disponíveis para sua empresa. Solicite uma cotação personalizada.",
+    href: "/planos/bradesco-saude",
   },
   {
-    id: "sul-individual",
+    id: "sulamerica",
     name: "SulAmérica",
     logo: "/images/sul_america-logo.png",
-    category: "Individual",
-    description: "Conheça as opções disponíveis e descubra quais modalidades podem atender ao seu perfil.",
-    href: "#",
+    modalities: ["Empresarial", "Adesão"],
+    description:
+      "Conheça as alternativas de planos de saúde SulAmérica para empresas e para públicos elegíveis à contratação por adesão. Compare as opções e encontre a modalidade mais adequada às suas necessidades.",
+    href: "/planos/sulamerica",
   },
   {
-    id: "sul-empresarial",
-    name: "SulAmérica",
-    logo: "/images/sul_america-logo.png",
-    category: "Empresarial",
-    description: "Conheça as opções disponíveis e descubra quais modalidades podem atender ao seu perfil.",
-    href: "#",
+    id: "humana-saude",
+    name: "Humana Saúde",
+    logo: "/images/humana.png",
+    modalities: ["Empresarial", "Adesão"],
+    description:
+      "Avalie as opções de planos Humana Saúde para empresas e para beneficiários que atendam aos critérios da modalidade por adesão. Consulte as condições de contratação e as alternativas disponíveis.",
+    href: "/planos/humana-saude",
   },
   {
-    id: "unimed-individual",
-    name: "Unimed",
+    id: "sulmed",
+    name: "Sulmed",
+    logo: "/images/sulmed.png",
+    modalities: ["Empresarial", "Adesão"],
+    description:
+      "Conheça as opções de assistência à saúde da Sulmed, com alternativas para contratação empresarial e por adesão, conforme os critérios de elegibilidade. Solicite informações para identificar o plano mais adequado ao seu perfil.",
+    href: "/planos/sulmed",
+  },
+  {
+    id: "unimed-porto-alegre",
+    name: "Unimed Porto Alegre",
     logo: "/images/unimed.png",
-    category: "Individual",
-    description: "Conheça as opções disponíveis e descubra quais modalidades podem atender ao seu perfil.",
-    href: "#",
-  },
-  {
-    id: "unimed-empresarial",
-    name: "Unimed",
-    logo: "/images/unimed.png",
-    category: "Empresarial",
-    description: "Conheça as opções disponíveis e descubra quais modalidades podem atender ao seu perfil.",
-    href: "#",
+    modalities: ["Empresarial"],
+    description:
+      "Conheça as alternativas de planos empresariais da Unimed Porto Alegre. Consulte as opções de contratação, as coberturas disponíveis e as condições para encontrar uma solução adequada à sua empresa.",
+    href: "/planos/unimed-porto-alegre",
   },
 ];
 
@@ -128,40 +144,12 @@ function Icon({ type }: { type: string }) {
 export default function Home() {
   return (
     <main className="min-h-screen bg-[#F5F5F5] text-[#1A353C]">
-      <header className="bg-[#1A353C] px-4 py-4 sm:px-6 lg:px-8">
-        <div className="mx-auto flex max-w-360 items-center justify-between gap-4 rounded-[1.25rem] bg-[#1A353C] px-3 py-3 sm:px-5">
-          <div className="flex items-center gap-3">
-            <div className="relative h-12 w-12 overflow-hidden rounded-full bg-white/10 ring-1 ring-white/20">
-              <Image
-                src="/images/logo.png"
-                alt="VANESSA TAVARES"
-                fill
-                className="object-cover p-1"
-              />
-            </div>
-            <div className="leading-none text-white">
-              <p className="text-[0.7rem] font-semibold tracking-[0.12em]">VANESSA TAVARES</p>
-              <p className="mt-1 text-[0.55rem] uppercase tracking-[0.14em] text-white/70">
-                Corretora de seguros
-              </p>
-            </div>
-          </div>
+      <SiteHeader />
 
-          <nav className="hidden items-center gap-6 text-sm text-white/85 md:flex">
-            {navigation.map((item) => (
-              <a key={item} href="#" className="transition hover:text-white">
-                {item}
-              </a>
-            ))}
-          </nav>
-
-          <Button href="#" className="min-w-37.5 rounded-full px-5 py-3 text-sm">
-            Solicitar cotação
-          </Button>
-        </div>
-      </header>
-
-      <section className="relative isolate overflow-hidden bg-[#1A353C]">
+      <section
+        id="inicio"
+        className="scroll-mt-6 relative isolate overflow-hidden bg-[#1A353C]"
+      >
         <div className="absolute inset-0 bg-[url('/images/fundo.png')] bg-cover bg-center opacity-95" />
         <div className="absolute inset-0 bg-[#1A353C]/70" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.15),transparent_32%),radial-gradient(circle_at_75%_30%,rgba(255,255,255,0.12),transparent_28%)]" />
@@ -182,11 +170,11 @@ export default function Home() {
             </p>
 
             <div className="mt-8 flex flex-wrap gap-4">
-              <Button href="#" className="rounded-full px-7 py-4 text-base shadow-[0_18px_40px_rgba(26,53,60,0.28)]">
+              <Button href="/#planos" className="rounded-full px-7 py-4 text-base shadow-[0_18px_40px_rgba(26,53,60,0.28)]">
                 Solicitar cotação
               </Button>
 
-              <Button variant="secondary" href="#" className="rounded-full border-white/35 bg-white/8 px-7 py-4 text-base text-white hover:bg-white/15">
+              <Button variant="secondary" href="/#planos" className="rounded-full border-white/35 bg-white/8 px-7 py-4 text-base text-white hover:bg-white/15">
                 Conhecer os planos
               </Button>
             </div>
@@ -206,7 +194,10 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-[#E9EEEE] px-4 py-8 sm:px-6 lg:px-8">
+      <section
+        id="atendimento"
+        className="scroll-mt-6 bg-[#E9EEEE] px-4 py-8 sm:px-6 lg:px-8"
+      >
         <div className="mx-auto max-w-360 rounded-[18px] bg-[#E9EEEE] px-2 py-3">
           <h2 className="px-2 pt-2 text-[clamp(2.1rem,4vw,4rem)] font-semibold leading-[1.06] tracking-[-0.06em] text-[#1A353C] sm:px-4">
             Por que escolher nosso atendimento?
@@ -239,6 +230,7 @@ export default function Home() {
         </div>
       </section>
 
+      <AboutBroker />
       <PlanCatalog plans={plans} />
     </main>
   );
