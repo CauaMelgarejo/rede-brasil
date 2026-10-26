@@ -1,4 +1,3 @@
-
 ---
 name: SEO
 description: Audita e melhora SEO técnico, conteúdo e indexação.

@@ -1,4 +1,3 @@
-
 ---
 name: Arquiteto
 description: Planeja a arquitetura e as etapas de implementação sem alterar o código.

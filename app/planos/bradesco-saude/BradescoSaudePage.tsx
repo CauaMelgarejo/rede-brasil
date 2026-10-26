@@ -70,18 +70,18 @@ function validateForm(values: QuoteFormValues): FormErrors {
   const errors: FormErrors = {};
   const phoneDigits = values.whatsapp.replace(/\D/g, "");
 
-  if (values.fullName.trim().split(/\s+/).filter(Boolean).length < 2) {
-    errors.fullName = "Informe seu nome e sobrenome.";
-  }
+  if (!values.fullName.trim()) errors.fullName = "Informe seu nome.";
   if (!/^\d{10,11}$/.test(phoneDigits)) {
-    errors.whatsapp = "Informe um WhatsApp com DDD, com 10 ou 11 dígitos.";
+    errors.whatsapp = "Informe um celular com DDD, com 10 ou 11 dígitos.";
   }
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email.trim())) {
+  if (values.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email.trim())) {
     errors.email = "Informe um e-mail válido.";
   }
-  if (!values.city.trim()) errors.city = "Informe sua cidade.";
-  if (!/^\d+$/.test(values.peopleCount) || Number(values.peopleCount) < 3) {
-    errors.peopleCount = "Informe uma quantidade de pelo menos 3 pessoas.";
+  if (
+    values.peopleCount &&
+    (!/^\d+$/.test(values.peopleCount) || Number(values.peopleCount) < 3)
+  ) {
+    errors.peopleCount = "Informe pelo menos 3 pessoas.";
   }
 
   return errors;
@@ -92,15 +92,21 @@ function buildWhatsAppMessage(values: QuoteFormValues) {
     "Olá! Gostaria de solicitar uma cotação Bradesco Saúde.",
     "",
     `Nome: ${values.fullName.trim()}`,
-    `WhatsApp: ${values.whatsapp.trim()}`,
-    `E-mail: ${values.email.trim()}`,
-    `Cidade: ${values.city.trim()}`,
+    `Celular: ${values.whatsapp.trim()}`,
     "Modalidade: Empresarial",
-    `Situação do CNPJ: ${values.cnpjStatus || "Não informado"}`,
-    `Quantidade de pessoas: ${values.peopleCount}`,
-    `Coparticipação: ${values.copayPreference || "Não informado"}`,
-    `Plano odontológico: ${values.dentalInterest || "Não informado"}`,
-    `Observações: ${values.notes.trim() || "Nenhuma"}`,
+    ...(values.email.trim() ? [`E-mail: ${values.email.trim()}`] : []),
+    ...(values.city.trim() ? [`Cidade: ${values.city.trim()}`] : []),
+    ...(values.cnpjStatus ? [`Situação do CNPJ: ${values.cnpjStatus}`] : []),
+    ...(values.peopleCount
+      ? [`Quantidade de pessoas: ${values.peopleCount}`]
+      : []),
+    ...(values.copayPreference
+      ? [`Coparticipação: ${values.copayPreference}`]
+      : []),
+    ...(values.dentalInterest
+      ? [`Plano odontológico: ${values.dentalInterest}`]
+      : []),
+    ...(values.notes.trim() ? [`Observações: ${values.notes.trim()}`] : []),
   ].join("\n");
 }
 
@@ -297,15 +303,16 @@ export function BradescoSaudePage() {
                     <div className="mb-6 max-w-2xl">
                       <h4 className="text-xl font-semibold">Solicite uma cotação</h4>
                       <p className="mt-2 text-sm leading-6 text-[#1A353C]/70">
-                        Preencha seus dados de contato e preferência. Não
-                        informe dados de saúde ou documentos pessoais.
+                        Nome e celular são obrigatórios. Os demais dados são
+                        opcionais.
                       </p>
                     </div>
 
                     <div className="grid gap-x-5 gap-y-4 md:grid-cols-2">
                       <FormInput
                         id="fullName"
-                        label="Nome completo"
+                        label="Nome"
+                        required
                         value={values.fullName}
                         error={errors.fullName}
                         onChange={(value) => updateField("fullName", value)}
@@ -313,7 +320,8 @@ export function BradescoSaudePage() {
                       />
                       <FormInput
                         id="whatsapp"
-                        label="WhatsApp com DDD"
+                        label="Celular com DDD"
+                        required
                         value={values.whatsapp}
                         error={errors.whatsapp}
                         onChange={(value) => updateField("whatsapp", value)}
@@ -322,7 +330,7 @@ export function BradescoSaudePage() {
                       />
                       <FormInput
                         id="email"
-                        label="E-mail"
+                        label="E-mail (opcional)"
                         type="email"
                         value={values.email}
                         error={errors.email}
@@ -331,23 +339,14 @@ export function BradescoSaudePage() {
                       />
                       <FormInput
                         id="city"
-                        label="Cidade"
+                        label="Cidade (opcional)"
                         value={values.city}
-                        error={errors.city}
                         onChange={(value) => updateField("city", value)}
                         autoComplete="address-level2"
                       />
-                      <label className="block text-sm font-medium">
-                        Modalidade
-                        <input
-                          readOnly
-                          value="Empresarial"
-                          className={`${fieldClasses} bg-[#F1F4F4]`}
-                        />
-                      </label>
                       <FormSelect
                         id="cnpjStatus"
-                        label="Situação do CNPJ"
+                        label="Situação do CNPJ (opcional)"
                         value={values.cnpjStatus}
                         onChange={(value) => updateField("cnpjStatus", value)}
                         options={[
@@ -359,7 +358,7 @@ export function BradescoSaudePage() {
                       />
                       <FormInput
                         id="peopleCount"
-                        label="Quantidade de pessoas"
+                        label="Quantidade de pessoas (opcional)"
                         type="number"
                         min="3"
                         step="1"
@@ -370,9 +369,11 @@ export function BradescoSaudePage() {
                       />
                       <FormSelect
                         id="copayPreference"
-                        label="Preferência de coparticipação"
+                        label="Preferência de coparticipação (opcional)"
                         value={values.copayPreference}
-                        onChange={(value) => updateField("copayPreference", value)}
+                        onChange={(value) =>
+                          updateField("copayPreference", value)
+                        }
                         options={[
                           ["", "Selecione uma opção"],
                           ["Com coparticipação", "Com coparticipação"],
@@ -382,9 +383,11 @@ export function BradescoSaudePage() {
                       />
                       <FormSelect
                         id="dentalInterest"
-                        label="Interesse em plano odontológico"
+                        label="Interesse em plano odontológico (opcional)"
                         value={values.dentalInterest}
-                        onChange={(value) => updateField("dentalInterest", value)}
+                        onChange={(value) =>
+                          updateField("dentalInterest", value)
+                        }
                         options={[
                           ["", "Selecione uma opção"],
                           ["Sim", "Sim"],
@@ -393,11 +396,16 @@ export function BradescoSaudePage() {
                         ]}
                       />
                       <label className="block text-sm font-medium md:col-span-2">
-                        Observações <span className="font-normal text-[#1A353C]/60">(opcional)</span>
+                        Observações{" "}
+                        <span className="font-normal text-[#1A353C]/60">
+                          (opcional)
+                        </span>
                         <textarea
                           rows={4}
                           value={values.notes}
-                          onChange={(event) => updateField("notes", event.target.value)}
+                          onChange={(event) =>
+                            updateField("notes", event.target.value)
+                          }
                           className={fieldClasses}
                         />
                       </label>
@@ -442,6 +450,7 @@ type FormInputProps = {
   step?: string;
   autoComplete?: string;
   inputMode?: "text" | "tel" | "numeric";
+  required?: boolean;
   onChange: (value: string) => void;
 };
 
@@ -455,6 +464,7 @@ function FormInput({
   step,
   autoComplete,
   inputMode,
+  required = false,
   onChange,
 }: FormInputProps) {
   return (
@@ -464,7 +474,7 @@ function FormInput({
         id={id}
         name={id}
         type={type}
-        required
+        required={required}
         min={min}
         step={step}
         autoComplete={autoComplete}

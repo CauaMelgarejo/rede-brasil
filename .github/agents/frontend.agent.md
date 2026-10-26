@@ -1,4 +1,3 @@
-
 ---
 name: Front-end
 description: Implementa páginas, componentes e formulários do site.

@@ -3,6 +3,7 @@
 import { MessageCircleMore } from "lucide-react";
 import { useMemo, useState } from "react";
 import { PlanCard, type PlanCardData } from "@/components/landing/PlanCard";
+import { WHATSAPP_BUSINESS_PHONE } from "@/lib/whatsapp";
 
 const categories = ["Todos", "Individual", "Empresarial"] as const;
 type Category = (typeof categories)[number];
@@ -12,6 +13,15 @@ type PlanCatalogProps = {
 };
 
 export function PlanCatalog({ plans }: PlanCatalogProps) {
+  const phone = WHATSAPP_BUSINESS_PHONE.replace(/\D/g, "");
+  const hasConfiguredPhone = /^\d{10,15}$/.test(phone);
+  const quoteMessage = encodeURIComponent(
+    "Olá! Gostaria de fazer uma cotação e conhecer as opções de planos de saúde.",
+  );
+  const quoteHref = hasConfiguredPhone
+    ? `https://wa.me/${phone}?text=${quoteMessage}`
+    : null;
+
   const [activeFilter, setActiveFilter] = useState<Category>("Todos");
 
   const filteredPlans = useMemo(() => {
@@ -72,12 +82,20 @@ export function PlanCatalog({ plans }: PlanCatalogProps) {
               </div>
             </div>
 
-            <button
-              type="button"
-              className="inline-flex items-center justify-center rounded-full bg-[#27C58B] px-5 py-3 text-sm font-semibold text-[#1A353C] shadow-[0_12px_32px_rgba(39,197,139,0.35)] transition hover:bg-[#36d79d]"
-            >
-              Fazer cotação de todos os planos
-            </button>
+            {quoteHref ? (
+              <a
+                href={quoteHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center rounded-full bg-[#27C58B] px-5 py-3 text-sm font-semibold text-[#1A353C] shadow-[0_12px_32px_rgba(39,197,139,0.35)] transition hover:bg-[#36d79d] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#1A353C]"
+              >
+                Fazer cotação de todos os planos
+              </a>
+            ) : (
+              <p className="text-sm text-white/80" role="status">
+                O WhatsApp comercial ainda não está configurado.
+              </p>
+            )}
           </div>
         </div>
       </div>

@@ -150,7 +150,7 @@ export default function Home() {
         id="inicio"
         className="scroll-mt-6 relative isolate overflow-hidden bg-[#1A353C]"
       >
-        <div className="absolute inset-0 bg-[url('/images/fundo.png')] bg-cover bg-center opacity-95" />
+        <div className="absolute inset-0 bg-[url('/images/fundo.png')] bg-cover bg-[position:80%_center] opacity-95 sm:bg-center" />
         <div className="absolute inset-0 bg-[#1A353C]/70" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.15),transparent_32%),radial-gradient(circle_at_75%_30%,rgba(255,255,255,0.12),transparent_28%)]" />
 

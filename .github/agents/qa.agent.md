@@ -1,4 +1,3 @@
-
 ---
 name: QA
 description: Planeja testes, valida requisitos e investiga defeitos.

@@ -69,30 +69,30 @@ function createInitialFormValues(): QuoteFormValues {
   };
 }
 
-function validateForm(
-  values: QuoteFormValues,
-  minimumLives: number,
-): FormErrors {
+function validateForm(values: QuoteFormValues): FormErrors {
   const errors: FormErrors = {};
   const phoneDigits = values.whatsapp.replace(/\D/g, "");
 
-  if (values.fullName.trim().split(/\s+/).filter(Boolean).length < 2) {
-    errors.fullName = "Informe seu nome e sobrenome.";
-  }
+  if (!values.fullName.trim()) errors.fullName = "Informe seu nome.";
   if (!/^\d{10,11}$/.test(phoneDigits)) {
-    errors.whatsapp = "Informe um WhatsApp com DDD, com 10 ou 11 dígitos.";
+    errors.whatsapp = "Informe um celular com DDD, com 10 ou 11 dígitos.";
   }
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email.trim())) {
+  if (values.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email.trim())) {
     errors.email = "Informe um e-mail válido.";
   }
-  if (!values.city.trim()) errors.city = "Informe sua cidade.";
-  if (
-    !/^[1-9]\d*$/.test(values.peopleCount) ||
-    Number(values.peopleCount) < minimumLives
-  ) {
-    errors.peopleCount = `Informe uma quantidade de pelo menos ${minimumLives} ${minimumLives === 1 ? "vida" : "vidas"}.`;
-  }
 
+  return errors;
+}
+
+function validateOption(values: QuoteFormValues, minimumLives: number) {
+  const errors = validateForm(values);
+  if (
+    values.peopleCount &&
+    (!/^\d+$/.test(values.peopleCount) ||
+      Number(values.peopleCount) < minimumLives)
+  ) {
+    errors.peopleCount = `Informe pelo menos ${minimumLives} ${minimumLives === 1 ? "vida" : "vidas"}.`;
+  }
   return errors;
 }
 
@@ -105,18 +105,24 @@ function buildWhatsAppMessage(
     `Olá! Gostaria de solicitar uma cotação ${operator.name}.`,
     "",
     `Nome: ${values.fullName.trim()}`,
-    `WhatsApp: ${values.whatsapp.trim()}`,
-    `E-mail: ${values.email.trim()}`,
-    `Cidade: ${values.city.trim()}`,
+    `Celular: ${values.whatsapp.trim()}`,
     `Modalidade: ${option.modality}`,
     `Opção: alternativa genérica a consultar (${option.modality})`,
-    ...(option.modality === "Empresarial"
-      ? [`Situação do CNPJ: ${values.cnpjStatus || "Não informado"}`]
+    ...(values.email.trim() ? [`E-mail: ${values.email.trim()}`] : []),
+    ...(values.city.trim() ? [`Cidade: ${values.city.trim()}`] : []),
+    ...(option.modality === "Empresarial" && values.cnpjStatus
+      ? [`Situação do CNPJ: ${values.cnpjStatus}`]
       : []),
-    `Quantidade de pessoas: ${values.peopleCount}`,
-    `Coparticipação: ${values.copayPreference || "Não informado"}`,
-    `Interesse em plano odontológico: ${values.dentalInterest || "Não informado"}`,
-    `Observações: ${values.notes.trim() || "Nenhuma"}`,
+    ...(values.peopleCount
+      ? [`Quantidade de pessoas: ${values.peopleCount}`]
+      : []),
+    ...(values.copayPreference
+      ? [`Coparticipação: ${values.copayPreference}`]
+      : []),
+    ...(values.dentalInterest
+      ? [`Interesse em plano odontológico: ${values.dentalInterest}`]
+      : []),
+    ...(values.notes.trim() ? [`Observações: ${values.notes.trim()}`] : []),
   ].join("\n");
 }
 
@@ -160,7 +166,7 @@ export function OperatorPlanPage({ operator }: { operator: OperatorPlan }) {
     option: OperatorOption,
   ) {
     event.preventDefault();
-    const nextErrors = validateForm(values, option.minimumLives);
+    const nextErrors = validateOption(values, option.minimumLives);
     setErrors(nextErrors);
 
     if (Object.keys(nextErrors).length > 0) {
@@ -379,15 +385,16 @@ export function OperatorPlanPage({ operator }: { operator: OperatorPlan }) {
                             Solicite uma cotação
                           </h4>
                           <p className="mt-2 text-sm leading-6 text-[#1A353C]/70">
-                            Preencha seus dados de contato e preferência. Não
-                            informe dados de saúde ou documentos pessoais.
+                            Nome e celular são obrigatórios. Os demais dados
+                            são opcionais.
                           </p>
                         </div>
 
                         <div className="grid gap-x-5 gap-y-4 md:grid-cols-2">
                           <FormInput
                             id="fullName"
-                            label="Nome completo"
+                            label="Nome"
+                            required
                             value={values.fullName}
                             error={errors.fullName}
                             onChange={(value) => updateField("fullName", value)}
@@ -395,7 +402,8 @@ export function OperatorPlanPage({ operator }: { operator: OperatorPlan }) {
                           />
                           <FormInput
                             id="whatsapp"
-                            label="WhatsApp com DDD"
+                            label="Celular com DDD"
+                            required
                             value={values.whatsapp}
                             error={errors.whatsapp}
                             onChange={(value) => updateField("whatsapp", value)}
@@ -404,7 +412,7 @@ export function OperatorPlanPage({ operator }: { operator: OperatorPlan }) {
                           />
                           <FormInput
                             id="email"
-                            label="E-mail"
+                            label="E-mail (opcional)"
                             type="email"
                             value={values.email}
                             error={errors.email}
@@ -413,9 +421,8 @@ export function OperatorPlanPage({ operator }: { operator: OperatorPlan }) {
                           />
                           <FormInput
                             id="city"
-                            label="Cidade"
+                            label="Cidade (opcional)"
                             value={values.city}
-                            error={errors.city}
                             onChange={(value) => updateField("city", value)}
                             autoComplete="address-level2"
                           />
@@ -434,7 +441,7 @@ export function OperatorPlanPage({ operator }: { operator: OperatorPlan }) {
                           {option.modality === "Empresarial" && (
                             <FormSelect
                               id="cnpjStatus"
-                              label="Situação do CNPJ"
+                              label="Situação do CNPJ (opcional)"
                               value={values.cnpjStatus}
                               onChange={(value) =>
                                 updateField("cnpjStatus", value)
@@ -452,7 +459,7 @@ export function OperatorPlanPage({ operator }: { operator: OperatorPlan }) {
                           )}
                           <FormInput
                             id="peopleCount"
-                            label="Quantidade de pessoas"
+                            label="Quantidade de pessoas (opcional)"
                             type="number"
                             min={String(option.minimumLives)}
                             step="1"
@@ -465,7 +472,7 @@ export function OperatorPlanPage({ operator }: { operator: OperatorPlan }) {
                           />
                           <FormSelect
                             id="copayPreference"
-                            label="Preferência de coparticipação"
+                            label="Preferência de coparticipação (opcional)"
                             value={values.copayPreference}
                             onChange={(value) =>
                               updateField("copayPreference", value)
@@ -479,7 +486,7 @@ export function OperatorPlanPage({ operator }: { operator: OperatorPlan }) {
                           />
                           <FormSelect
                             id="dentalInterest"
-                            label="Interesse em plano odontológico"
+                            label="Interesse em plano odontológico (opcional)"
                             value={values.dentalInterest}
                             onChange={(value) =>
                               updateField("dentalInterest", value)
@@ -558,6 +565,7 @@ type FormInputProps = {
   step?: string;
   autoComplete?: string;
   inputMode?: "text" | "tel" | "numeric";
+  required?: boolean;
   onChange: (value: string) => void;
 };
 
@@ -571,6 +579,7 @@ function FormInput({
   step,
   autoComplete,
   inputMode,
+  required = false,
   onChange,
 }: FormInputProps) {
   return (
@@ -580,7 +589,7 @@ function FormInput({
         id={id}
         name={id}
         type={type}
-        required
+        required={required}
         min={min}
         step={step}
         autoComplete={autoComplete}
