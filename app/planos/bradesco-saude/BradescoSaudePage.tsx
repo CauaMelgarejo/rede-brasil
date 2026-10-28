@@ -112,7 +112,7 @@ function buildWhatsAppMessage(values: QuoteFormValues) {
 
 export function BradescoSaudePage() {
   const [activeFilter, setActiveFilter] = useState<PlanFilter>("Todos");
-  const [isFormOpen, setIsFormOpen] = useState(false);
+  const [isFormOpen, setIsFormOpen] = useState(true);
   const [values, setValues] = useState(initialFormValues);
   const [errors, setErrors] = useState<FormErrors>({});
   const [formMessage, setFormMessage] = useState("");
@@ -188,35 +188,6 @@ export function BradescoSaudePage() {
                 Solicitar cotação
                 <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
               </Button>
-            </div>
-          </div>
-        </section>
-
-        <section className="px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
-          <div className="mx-auto max-w-360">
-            <div className="max-w-2xl">
-              <p className="text-sm font-semibold uppercase tracking-[0.14em] text-[#1A353C]/65">
-                Informação e orientação
-              </p>
-              <h2 className="mt-3 text-3xl font-semibold tracking-[-0.04em] sm:text-4xl">
-                Conheça as possibilidades
-              </h2>
-            </div>
-            <div className="mt-9 grid gap-5 md:grid-cols-3">
-              {benefits.map(({ title, description, Icon }) => (
-                <article
-                  key={title}
-                  className="rounded-2xl border border-[#1A353C]/10 bg-white p-6 shadow-[0_10px_25px_rgba(26,53,60,0.04)]"
-                >
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#E9EEEE]">
-                    <Icon className="h-6 w-6 text-[#1A353C]" aria-hidden="true" />
-                  </div>
-                  <h3 className="mt-5 text-lg font-semibold">{title}</h3>
-                  <p className="mt-2 text-sm leading-7 text-[#1A353C]/75">
-                    {description}
-                  </p>
-                </article>
-              ))}
             </div>
           </div>
         </section>
@@ -433,6 +404,35 @@ export function BradescoSaudePage() {
                 )}
               </article>
             )}
+          </div>
+        </section>
+
+        <section className="px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
+          <div className="mx-auto max-w-360">
+            <div className="max-w-2xl">
+              <p className="text-sm font-semibold uppercase tracking-[0.14em] text-[#1A353C]/65">
+                Informação e orientação
+              </p>
+              <h2 className="mt-3 text-3xl font-semibold tracking-[-0.04em] sm:text-4xl">
+                Conheça as possibilidades
+              </h2>
+            </div>
+            <div className="mt-9 grid gap-5 md:grid-cols-3">
+              {benefits.map(({ title, description, Icon }) => (
+                <article
+                  key={title}
+                  className="rounded-2xl border border-[#1A353C]/10 bg-white p-6 shadow-[0_10px_25px_rgba(26,53,60,0.04)]"
+                >
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#E9EEEE]">
+                    <Icon className="h-6 w-6 text-[#1A353C]" aria-hidden="true" />
+                  </div>
+                  <h3 className="mt-5 text-lg font-semibold">{title}</h3>
+                  <p className="mt-2 text-sm leading-7 text-[#1A353C]/75">
+                    {description}
+                  </p>
+                </article>
+              ))}
+            </div>
           </div>
         </section>
       </main>
