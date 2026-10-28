@@ -37,45 +37,10 @@ const reasons = [
 
 const plans: PlanCardData[] = [
   {
-    id: "medsenior",
-    name: "MedSênior",
-    logo: "/images/medSenior.png",
-    modalities: ["Individual", "Empresarial"],
-    description:
-      "Planos de saúde voltados ao público sênior, com opções para diferentes necessidades de cuidado e assistência. Conheça as modalidades disponíveis e encontre uma alternativa alinhada ao seu perfil.",
-    href: "/planos/medsenior",
-  },
-  {
-    id: "hapvida",
-    name: "Hapvida",
-    logo: "/images/hapvida.png",
-    modalities: ["Individual", "Empresarial"],
-    description:
-      "Encontre opções de planos de saúde para você, sua família ou sua empresa. Consulte as alternativas disponíveis e compare modalidades de contratação, coberturas e condições.",
-    href: "/planos/hapvida",
-  },
-  {
-    id: "doctor-clin",
-    name: "Doctor Clin",
-    logo: "/images/doctorclin.png",
-    modalities: ["Empresarial", "Adesão"],
-    description:
-      "Conheça as opções de assistência à saúde da Doctor Clin e avalie as alternativas disponíveis para empresas e para beneficiários elegíveis à modalidade por adesão.",
-    href: "/planos/doctor-clin",
-  },
-  {
-    id: "amil",
-    name: "Amil",
-    logo: "/images/amil-logo.png",
-    modalities: ["Empresarial"],
-    description:
-      "Descubra alternativas de planos de saúde empresariais para sua organização. Consulte as opções disponíveis e encontre uma configuração compatível com o perfil da empresa e de seus colaboradores.",
-    href: "/planos/amil",
-  },
-  {
     id: "bradesco-saude",
     name: "Bradesco Saúde",
     logo: "/images/logo-bradesco-hero%201.png",
+    coverage: "Nacional",
     modalities: ["Empresarial"],
     description:
       "Explore as opções de planos empresariais Bradesco Saúde e conheça as alternativas de cobertura e contratação disponíveis para sua empresa. Solicite uma cotação personalizada.",
@@ -85,37 +50,85 @@ const plans: PlanCardData[] = [
     id: "sulamerica",
     name: "SulAmérica",
     logo: "/images/sul_america-logo.png",
+    logoClassName: "max-h-[74px] sm:max-h-[82px]",
+    coverage: "Nacional",
     modalities: ["Empresarial", "Adesão"],
     description:
       "Conheça as alternativas de planos de saúde SulAmérica para empresas e para públicos elegíveis à contratação por adesão. Compare as opções e encontre a modalidade mais adequada às suas necessidades.",
     href: "/planos/sulamerica",
   },
   {
-    id: "humana-saude",
-    name: "Humana Saúde",
-    logo: "/images/humana.png",
+    id: "amil",
+    name: "Amil",
+    logo: "/images/amil-logo.png",
+    logoClassName: "max-h-[74px] sm:max-h-[82px]",
+    coverage: "Nacional",
+    modalities: ["Empresarial"],
+    description:
+      "Descubra alternativas de planos de saúde empresariais para sua organização. Consulte as opções disponíveis e encontre uma configuração compatível com o perfil da empresa e de seus colaboradores.",
+    href: "/planos/amil",
+  },
+  {
+    id: "unimed-porto-alegre",
+    name: "Unimed Porto Alegre",
+    logo: "/images/unimed.png",
+    logoClassName: "max-h-[74px] sm:max-h-[82px]",
+    coverage: "Regional",
+    modalities: ["Empresarial"],
+    description:
+      "Conheça as alternativas de planos empresariais da Unimed Porto Alegre. Consulte as opções de contratação, as coberturas disponíveis e as condições para encontrar uma solução adequada à sua empresa.",
+    href: "/planos/unimed-porto-alegre",
+  },
+  {
+    id: "medsenior",
+    name: "MedSênior",
+    logo: "/images/medSenior.png",
+    logoClassName: "max-h-[74px] sm:max-h-[82px]",
+    coverage: "Nacional + regional",
+    modalities: ["Individual", "Empresarial"],
+    description:
+      "Planos de saúde voltados ao público sênior, com opções para diferentes necessidades de cuidado e assistência. Conheça as modalidades disponíveis e encontre uma alternativa alinhada ao seu perfil.",
+    href: "/planos/medsenior",
+  },
+  {
+    id: "doctor-clin",
+    name: "Doctor Clin",
+    logo: "/images/doctorclin.png",
+    coverage: "Regional",
     modalities: ["Empresarial", "Adesão"],
     description:
-      "Avalie as opções de planos Humana Saúde para empresas e para beneficiários que atendam aos critérios da modalidade por adesão. Consulte as condições de contratação e as alternativas disponíveis.",
-    href: "/planos/humana-saude",
+      "Conheça as opções de assistência à saúde da Doctor Clin e avalie as alternativas disponíveis para empresas e para beneficiários elegíveis à modalidade por adesão.",
+    href: "/planos/doctor-clin",
+  },
+  {
+    id: "hapvida",
+    name: "Hapvida",
+    logo: "/images/hapvida.png",
+    coverage: "Regional",
+    modalities: ["Individual", "Empresarial"],
+    description:
+      "Encontre opções de planos de saúde para você, sua família ou sua empresa. Consulte as alternativas disponíveis e compare modalidades de contratação, coberturas e condições.",
+    href: "/planos/hapvida",
   },
   {
     id: "sulmed",
     name: "Sulmed",
     logo: "/images/sulmed.png",
+    coverage: "Regional",
     modalities: ["Empresarial", "Adesão"],
     description:
       "Conheça as opções de assistência à saúde da Sulmed, com alternativas para contratação empresarial e por adesão, conforme os critérios de elegibilidade. Solicite informações para identificar o plano mais adequado ao seu perfil.",
     href: "/planos/sulmed",
   },
   {
-    id: "unimed-porto-alegre",
-    name: "Unimed Porto Alegre",
-    logo: "/images/unimed.png",
-    modalities: ["Empresarial"],
+    id: "humana-saude",
+    name: "Humana Saúde",
+    logo: "/images/humana.png",
+    coverage: "Regional",
+    modalities: ["Empresarial", "Adesão"],
     description:
-      "Conheça as alternativas de planos empresariais da Unimed Porto Alegre. Consulte as opções de contratação, as coberturas disponíveis e as condições para encontrar uma solução adequada à sua empresa.",
-    href: "/planos/unimed-porto-alegre",
+      "Avalie as opções de planos Humana Saúde para empresas e para beneficiários que atendam aos critérios da modalidade por adesão. Consulte as condições de contratação e as alternativas disponíveis.",
+    href: "/planos/humana-saude",
   },
 ];
 

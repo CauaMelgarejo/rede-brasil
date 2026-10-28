@@ -5,6 +5,9 @@ export const metadata: Metadata = {
   title: "Planos Bradesco Saúde | Rede Brasil",
   description:
     "Conheça as opções empresariais Bradesco Saúde e solicite uma cotação personalizada.",
+  alternates: {
+    canonical: "/planos/bradesco-saude",
+  },
 };
 
 export default function Page() {

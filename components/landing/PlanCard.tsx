@@ -3,11 +3,14 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 export type PlanModality = "Individual" | "Empresarial" | "Adesão";
+export type PlanCoverage = "Nacional" | "Nacional + regional" | "Regional";
 
 export type PlanCardData = {
   id: string;
   name: string;
   logo: string;
+  logoClassName?: string;
+  coverage: PlanCoverage;
   modalities: PlanModality[];
   description: string;
   href: string;
@@ -20,6 +23,8 @@ type PlanCardProps = PlanCardData & {
 export function PlanCard({
   name,
   logo,
+  logoClassName,
+  coverage,
   modalities,
   description,
   href,
@@ -36,7 +41,10 @@ export function PlanCard({
             alt={name}
             width={220}
             height={80}
-            className="h-auto max-h-[60px] w-auto object-contain"
+            className={[
+              "h-auto w-auto object-contain",
+              logoClassName ?? "max-h-[60px]",
+            ].join(" ")}
           />
         </div>
 
@@ -46,9 +54,16 @@ export function PlanCard({
         >
           {name}
         </Link>
-        <span className="inline-flex w-fit rounded-full border border-[#1A353C]/30 bg-white px-2.5 py-1 text-[0.75rem] font-medium text-[#1A353C]/80">
-          {modalities.join(" e ")}
-        </span>
+
+        <div className="flex flex-wrap items-center justify-center gap-2">
+          <span className="inline-flex w-fit rounded-full bg-[#1A353C] px-2.5 py-1 text-[0.7rem] font-semibold uppercase tracking-[0.08em] text-white">
+            {coverage}
+          </span>
+          <span className="inline-flex w-fit rounded-full border border-[#1A353C]/30 bg-white px-2.5 py-1 text-[0.75rem] font-medium text-[#1A353C]/80">
+            {modalities.join(" e ")}
+          </span>
+        </div>
+
         <p className="text-sm leading-6 text-[#1A353C]/80">{description}</p>
       </div>
       <Link

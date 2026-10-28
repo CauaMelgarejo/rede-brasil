@@ -23,6 +23,9 @@ export async function generateMetadata({
   return {
     title: `Planos ${operator.name} | Rede Brasil`,
     description: operator.description,
+    alternates: {
+      canonical: `/planos/${slug}`,
+    },
   };
 }
 

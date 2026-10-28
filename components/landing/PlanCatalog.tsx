@@ -5,8 +5,16 @@ import { useMemo, useState } from "react";
 import { PlanCard, type PlanCardData } from "@/components/landing/PlanCard";
 import { WHATSAPP_BUSINESS_PHONE } from "@/lib/whatsapp";
 
-const categories = ["Todos", "Individual", "Empresarial"] as const;
-type Category = (typeof categories)[number];
+const modalityFilters = ["Todos", "Individual", "Empresarial"] as const;
+type ModalityFilter = (typeof modalityFilters)[number];
+
+const coverageFilters = [
+  "Todos",
+  "Nacional",
+  "Nacional + regional",
+  "Regional",
+] as const;
+type CoverageFilter = (typeof coverageFilters)[number];
 
 type PlanCatalogProps = {
   plans: PlanCardData[];
@@ -22,14 +30,24 @@ export function PlanCatalog({ plans }: PlanCatalogProps) {
     ? `https://wa.me/${phone}?text=${quoteMessage}`
     : null;
 
-  const [activeFilter, setActiveFilter] = useState<Category>("Todos");
+  const [activeModality, setActiveModality] = useState<ModalityFilter>("Todos");
+  const [activeCoverage, setActiveCoverage] = useState<CoverageFilter>("Todos");
 
   const filteredPlans = useMemo(() => {
-    if (activeFilter === "Todos") return plans;
-    return plans.filter((plan) =>
-      plan.modalities.includes(activeFilter),
-    );
-  }, [activeFilter, plans]);
+    let filtered = [...plans];
+
+    if (activeModality !== "Todos") {
+      filtered = filtered.filter((plan) =>
+        plan.modalities.includes(activeModality),
+      );
+    }
+
+    if (activeCoverage !== "Todos") {
+      filtered = filtered.filter((plan) => plan.coverage === activeCoverage);
+    }
+
+    return filtered;
+  }, [activeCoverage, activeModality, plans]);
 
   return (
     <section
@@ -37,26 +55,60 @@ export function PlanCatalog({ plans }: PlanCatalogProps) {
       className="scroll-mt-6 bg-[#F5F5F5] px-4 py-8 sm:px-6 lg:px-8"
     >
       <div className="mx-auto max-w-[1280px]">
-        <div className="mb-6 flex flex-wrap gap-3">
-          {categories.map((category) => {
-            const isActive = activeFilter === category;
+        <div className="mb-6 flex flex-col gap-4">
+          <div>
+            <p className="mb-2 text-xs font-semibold uppercase tracking-[0.16em] text-[#1A353C]/65">
+              Modalidade
+            </p>
+            <div className="flex flex-wrap gap-3">
+              {modalityFilters.map((category) => {
+                const isActive = activeModality === category;
 
-            return (
-              <button
-                key={category}
-                type="button"
-                onClick={() => setActiveFilter(category)}
-                className={[
-                  "rounded-full border px-5 py-2.5 text-sm font-medium transition-all duration-200",
-                  isActive
-                    ? "border-[#1A353C] bg-[#1A353C] text-white shadow-[0_10px_20px_rgba(26,53,60,0.12)]"
-                    : "border-[#1A353C]/25 bg-transparent text-[#1A353C] hover:border-[#1A353C]/45",
-                ].join(" ")}
-              >
-                {category}
-              </button>
-            );
-          })}
+                return (
+                  <button
+                    key={category}
+                    type="button"
+                    onClick={() => setActiveModality(category)}
+                    className={[
+                      "rounded-full border px-5 py-2.5 text-sm font-medium transition-all duration-200",
+                      isActive
+                        ? "border-[#1A353C] bg-[#1A353C] text-white shadow-[0_10px_20px_rgba(26,53,60,0.12)]"
+                        : "border-[#1A353C]/25 bg-transparent text-[#1A353C] hover:border-[#1A353C]/45",
+                    ].join(" ")}
+                  >
+                    {category}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          <div>
+            <p className="mb-2 text-xs font-semibold uppercase tracking-[0.16em] text-[#1A353C]/65">
+              Abrangência
+            </p>
+            <div className="flex flex-wrap gap-3">
+              {coverageFilters.map((coverage) => {
+                const isActive = activeCoverage === coverage;
+
+                return (
+                  <button
+                    key={coverage}
+                    type="button"
+                    onClick={() => setActiveCoverage(coverage)}
+                    className={[
+                      "rounded-full border px-5 py-2.5 text-sm font-medium transition-all duration-200",
+                      isActive
+                        ? "border-[#1A353C] bg-[#1A353C] text-white shadow-[0_10px_20px_rgba(26,53,60,0.12)]"
+                        : "border-[#1A353C]/25 bg-transparent text-[#1A353C] hover:border-[#1A353C]/45",
+                    ].join(" ")}
+                  >
+                    {coverage}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
         </div>
 
         <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">

@@ -183,7 +183,7 @@ export function BradescoSaudePage() {
               </p>
               <Button
                 href="#opcoes"
-                className="mt-8 rounded-full border-white bg-white px-7 py-4 text-base text-[#1A353C] hover:bg-white/90"
+                className="mt-8 rounded-full bg-[#1A353C] text-white shadow-[0_10px_20px_rgba(26,53,60,0.12)]"
               >
                 Solicitar cotação
                 <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
