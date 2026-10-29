@@ -101,7 +101,7 @@ export function PlanCarousel() {
       return;
     }
 
-    const interval = window.setInterval(next, 4500);
+    const interval = window.setInterval(next, 3200);
     return () => window.clearInterval(interval);
   }, [
     isHovered,
@@ -146,7 +146,7 @@ export function PlanCarousel() {
 
   return (
     <div
-      className="mt-8 flex items-center gap-3 sm:gap-5"
+      className="mt-8 rounded-[24px] border border-white/10 bg-[#F5F5F5]/95 p-2 shadow-[0_18px_35px_rgba(10,24,29,0.12)] sm:p-3"
       role="region"
       aria-label="Operadoras de planos de saúde"
       tabIndex={0}
@@ -185,7 +185,7 @@ export function PlanCarousel() {
     >
       <div
         ref={viewportRef}
-        className="flex flex-1 justify-center overflow-hidden"
+        className="flex flex-1 justify-center overflow-hidden rounded-[18px]"
       >
         <div
           ref={trackRef}
@@ -193,7 +193,7 @@ export function PlanCarousel() {
           className={[
             "flex w-full",
             isTransitionEnabled && !prefersReducedMotion
-              ? "transition-transform duration-700 ease-in-out motion-reduce:transition-none"
+              ? "transition-transform duration-500 ease-in-out motion-reduce:transition-none"
               : "",
           ].join(" ")}
           style={{
@@ -210,14 +210,14 @@ export function PlanCarousel() {
               <div
                 key={`${plan.name}-${index}`}
                 aria-hidden={isClone}
-                className="flex h-24 shrink-0 basis-[calc((100%_-_1rem)/2)] items-center justify-center px-1 sm:basis-[calc((100%_-_3rem)/4)] sm:px-4"
+                className="flex h-24 shrink-0 basis-[calc((100%_-_1rem)/2)] items-center justify-center rounded-2xl border border-[#1A353C]/8 bg-white/90 px-1 shadow-[0_10px_22px_rgba(26,53,60,0.08)] sm:basis-[calc((100%_-_3rem)/4)] sm:px-4"
               >
                 <Image
                   src={plan.src}
                   alt={plan.name}
                   width={plan.width}
                   height={plan.height}
-                  className="h-[4.25rem] w-auto object-contain brightness-110 drop-shadow-[0_6px_18px_rgba(255,255,255,0.12)] sm:h-[4.75rem]"
+                  className="h-[4.25rem] w-auto object-contain contrast-110 drop-shadow-[0_6px_16px_rgba(26,53,60,0.10)] sm:h-[4.75rem]"
                 />
               </div>
             );

@@ -41,7 +41,7 @@ export function AboutBroker() {
             id="about-broker-title"
             className="mt-5 text-3xl font-semibold leading-tight tracking-[-0.04em] text-[#1A353C] sm:text-4xl lg:text-5xl"
           >
-            17 anos de experiência no ramo de seguros, planos de saúde e
+            18 anos de experiência no ramo de seguros, planos de saúde e
             odontológico.
           </h2>
 
