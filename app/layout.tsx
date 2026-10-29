@@ -1,17 +1,7 @@
 import type { Metadata } from "next";
-import { Assistant, Plus_Jakarta_Sans } from "next/font/google";
+import type { ReactNode } from "react";
+import { SiteFooter } from "@/components/layout/SiteFooter";
 import "./globals.css";
-
-const plusJakartaSans = Plus_Jakarta_Sans({
-  variable: "--font-plus-jakarta-sans",
-  subsets: ["latin"],
-});
-
-const assistant = Assistant({
-  variable: "--font-assistant",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://planosdesauderedebrasil.com.br"),
@@ -22,15 +12,16 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html
       lang="pt-BR"
       data-scroll-behavior="smooth"
-      className={`${plusJakartaSans.variable} ${assistant.variable} h-full antialiased`}
+      className="h-full antialiased"
     >
       <body className="min-h-full flex flex-col bg-[#F5F5F5] text-[#1A353C]">
         {children}
+        <SiteFooter />
       </body>
     </html>
   );

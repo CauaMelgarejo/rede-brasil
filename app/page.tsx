@@ -10,6 +10,8 @@ import { SiteHeader } from "@/components/layout/SiteHeader";
 import { PlanCarousel } from "@/components/landing/PlanCarousel";
 import { PlanCatalog } from "@/components/landing/PlanCatalog";
 import { AboutBroker } from "@/components/landing/AboutBroker";
+import { ClientTrustMarquee } from "@/components/landing/ClientTrustMarquee";
+import { FaqSection } from "@/components/landing/FaqSection";
 import type { PlanCardData } from "@/components/landing/PlanCard";
 
 const reasons = [
@@ -245,6 +247,8 @@ export default function Home() {
 
       <AboutBroker />
       <PlanCatalog plans={plans} />
+      <ClientTrustMarquee />
+      <FaqSection />
     </main>
   );
 }
