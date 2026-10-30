@@ -20,9 +20,14 @@ export async function generateMetadata({
 
   if (!operator) notFound();
 
+  const localDescriptor =
+    operator.name === "Unimed Porto Alegre"
+      ? "em Porto Alegre/RS"
+      : "em Porto Alegre e atendimento em todo o Brasil";
+
   return {
-    title: `Planos ${operator.name} | Rede Brasil`,
-    description: operator.description,
+    title: `${operator.name} em Porto Alegre e atendimento em todo o Brasil | Rede Brasil`,
+    description: `${operator.description} Compare opções de ${operator.name} para pessoas físicas e empresas ${localDescriptor} e solicite uma cotação personalizada.`,
     alternates: {
       canonical: `/planos/${slug}`,
     },

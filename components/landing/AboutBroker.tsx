@@ -46,25 +46,27 @@ export function AboutBroker() {
           </h2>
 
           <p className="mt-5 text-lg leading-8 text-[#1A353C]/80 sm:text-xl">
-            Atendimento personalizado para ajudar você, sua família ou sua
-            empresa a encontrar a opção mais adequada às suas necessidades.
+            Corretora de planos de saúde em Porto Alegre/RS com atendimento em
+            todo o Brasil, oferecendo orientação personalizada para pessoas
+            físicas e empresas.
           </p>
 
           <div className="mt-6 space-y-4 text-base leading-8 text-[#1A353C]/75">
             <p>
               Com 18 anos de experiência no mercado de Seguros, Planos de saúde
-              e Odontológicos, oferecemos atendimento personalizado para
-              ajudar cada cliente a encontrar soluções adequadas ao seu perfil.
+              e Odontológicos, a Rede Brasil atua com foco em soluções para
+              clientes de Porto Alegre e também para quem busca atendimento em
+              outras regiões do Brasil.
             </p>
             <p>
-              Nosso compromisso é entender suas necessidades, esclarecer suas
-              dúvidas e acompanhar você durante o processo de escolha e
-              contratação, com atenção, transparência e cuidado em cada etapa.
+              Nosso compromisso é entender suas necessidades, esclarecer dúvidas
+              e acompanhar você durante o processo de escolha e contratação,
+              com atenção, transparência e cuidado em cada etapa.
             </p>
             <p>
               Mais do que apresentar opções, queremos construir uma relação de
-              confiança, oferecendo orientação próxima para que você tome sua
-              decisão com segurança.
+              confiança, oferecendo orientação próxima para que você encontre o
+              plano ideal com segurança e clareza.
             </p>
           </div>
 

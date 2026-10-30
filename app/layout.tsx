@@ -5,10 +5,26 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://planosdesauderedebrasil.com.br"),
-  title: "Rede Brasil | Corretora de planos de saúde",
-  description: "Site institucional para apresentação de planos de saúde e cotação por WhatsApp.",
+  title: "Planos de saúde em Porto Alegre e atendimento em todo o Brasil | Rede Brasil",
+  description:
+    "Corretora de planos de saúde em Porto Alegre/RS com atendimento em todo o Brasil. Compare opções para pessoas físicas e empresas e solicite uma cotação personalizada.",
   alternates: {
     canonical: "/",
+  },
+  openGraph: {
+    title: "Planos de saúde em Porto Alegre e atendimento em todo o Brasil | Rede Brasil",
+    description:
+      "Atendimento personalizado de planos de saúde em Porto Alegre/RS e em todo o Brasil para pessoas físicas e empresas.",
+    url: "https://planosdesauderedebrasil.com.br/",
+    siteName: "Rede Brasil",
+    locale: "pt-BR",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Planos de saúde em Porto Alegre e atendimento em todo o Brasil | Rede Brasil",
+    description:
+      "Corretora de planos de saúde em Porto Alegre/RS com atendimento em todo o Brasil.",
   },
 };
 

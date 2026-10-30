@@ -1,3 +1,5 @@
+import type { Metadata } from "next";
+import Script from "next/script";
 import {
   BadgeCheck,
   BriefcaseMedical,
@@ -12,7 +14,51 @@ import { PlanCatalog } from "@/components/landing/PlanCatalog";
 import { AboutBroker } from "@/components/landing/AboutBroker";
 import { ClientTrustMarquee } from "@/components/landing/ClientTrustMarquee";
 import { FaqSection } from "@/components/landing/FaqSection";
+import { faqItems } from "@/lib/faq";
 import type { PlanCardData } from "@/components/landing/PlanCard";
+
+export const metadata: Metadata = {
+  title: "Planos de saúde em Porto Alegre e atendimento em todo o Brasil | Rede Brasil",
+  description:
+    "Corretora de planos de saúde em Porto Alegre/RS com atendimento em todo o Brasil. Compare opções para pessoas físicas e empresas e solicite uma cotação personalizada.",
+  alternates: {
+    canonical: "/",
+  },
+};
+
+const organizationStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  name: "Rede Brasil",
+  image: "https://planosdesauderedebrasil.com.br/images/logo.png",
+  description:
+    "Corretora de planos de saúde em Porto Alegre/RS com atendimento em todo o Brasil para pessoas físicas e empresas.",
+  areaServed: ["Porto Alegre", "Rio Grande do Sul", "Brasil"],
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Praça Pereira Parobé, 130 - Centro Histórico",
+    addressLocality: "Porto Alegre",
+    addressRegion: "RS",
+    postalCode: "90010-090",
+    addressCountry: "BR",
+  },
+  telephone: "+55 51 98460-3230",
+  url: "https://planosdesauderedebrasil.com.br/",
+  sameAs: ["https://www.instagram.com/planosdesaude_redebrasil/"],
+};
+
+const faqStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqItems.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: item.answer,
+    },
+  })),
+};
 
 const reasons = [
   {
@@ -135,7 +181,11 @@ const plans: PlanCardData[] = [
 ];
 
 function Icon({ type }: { type: string }) {
-  const common = { size: 42, strokeWidth: 2.25, className: "h-[42px] w-[42px] text-[#1A353C]" };
+  const common = {
+    size: 42,
+    strokeWidth: 2.25,
+    className: "h-[42px] w-[42px] text-[#1A353C]",
+  };
 
   if (type === "user") {
     return <UserRound {...common} />;
@@ -159,6 +209,21 @@ function Icon({ type }: { type: string }) {
 export default function Home() {
   return (
     <main className="min-h-screen bg-[#F5F5F5] text-[#1A353C]">
+      <Script
+        id="organization-structured-data"
+        type="application/ld+json"
+        strategy="afterInteractive"
+      >
+        {JSON.stringify(organizationStructuredData)}
+      </Script>
+      <Script
+        id="faq-structured-data"
+        type="application/ld+json"
+        strategy="afterInteractive"
+      >
+        {JSON.stringify(faqStructuredData)}
+      </Script>
+
       <SiteHeader />
 
       <section
@@ -174,14 +239,17 @@ export default function Home() {
 
         <div className="relative mx-auto grid min-h-155 max-w-360 items-center gap-10 px-4 pb-10 pt-8 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:px-8 lg:pb-16">
           <div className="max-w-170 pb-4 pt-4 sm:pt-10">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-white/75">
+              Porto Alegre / RS e atendimento nacional
+            </p>
             <h1 className="max-w-135 text-4xl font-semibold leading-[1.08] tracking-[-0.04em] text-white sm:text-5xl lg:text-[4rem]">
-              Sua saúde merece a escolha certa
+              Planos de saúde em Porto Alegre e atendimento em todo o Brasil
             </h1>
 
             <p className="mt-6 max-w-152.5 text-xl leading-9 text-white/85">
-              Encontre o plano de saúde ideal para você, sua família ou sua empresa.
-              Conheça as opções disponíveis e conte com atendimento personalizado para
-              encontrar uma alternativa que combine com suas necessidades.
+              A Rede Brasil ajuda pessoas físicas e empresas a encontrar planos de saúde
+              com cotação personalizada, orientação clara e atendimento em Porto Alegre/RS
+              e em todo o Brasil.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-4">
