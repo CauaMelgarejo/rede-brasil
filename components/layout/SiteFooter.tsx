@@ -80,8 +80,21 @@ export function SiteFooter() {
                 Atendimento
               </p>
               <div className="mt-4 space-y-3 text-sm text-white/80">
-                <p>Atendimento personalizado com foco em saúde e clareza.</p>
-                <p>Orientação para encontrar o plano ideal para você ou sua empresa.</p>
+                <p>Endereço: Praça Pereira Parobé, 130 - Centro Histórico, Porto Alegre - RS, 90010-090</p>
+                <a
+                  href="https://www.instagram.com/planosdesaude_redebrasil/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block transition hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                >
+                  Instagram: @planosdesaude_redebrasil
+                </a>
+                <a
+                  href="mailto:vanessa@aiscorretora.com.br"
+                  className="block transition hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                >
+                  Email: vanessa@aiscorretora.com.br
+                </a>
               </div>
             </div>
           </div>

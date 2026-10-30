@@ -59,6 +59,7 @@ export function FaqSection() {
   const whatsappHref = hasConfiguredPhone
     ? `https://wa.me/${phone}?text=${encodeURIComponent("Olá! Tenho dúvidas sobre planos de saúde e gostaria de receber mais informações.")}`
     : "/#planos";
+  const instagramHref = "https://www.instagram.com/planosdesaude_redebrasil/";
 
   return (
     <section
@@ -151,6 +152,64 @@ export function FaqSection() {
               </div>
             );
           })}
+        </div>
+
+        <div className="mx-auto mt-12 max-w-6xl rounded-[1.6rem] border border-[#1A353C]/10 bg-white p-5 shadow-[0_12px_30px_rgba(26,53,60,0.06)] sm:p-6 lg:p-8">
+          <div className="text-center">
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#1A353C]/65">
+              Localização
+            </p>
+            <h3 className="mt-3 text-2xl font-semibold tracking-[-0.04em] text-[#1A353C] sm:text-3xl">
+              Visite nossa corretora em Porto Alegre
+            </h3>
+          </div>
+
+          <div className="mt-6 grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
+            <div className="overflow-hidden rounded-[1.1rem] border border-[#1A353C]/10 bg-[#F5F5F5]">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d405.4220723981062!2d-51.22724905461991!3d-30.027406248665894!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9519790ed05b2887%3A0x10af4e88df6e8b17!2sPr%C3%A7.%20Pereira%20Parob%C3%A9%2C%20130%20-%20Centro%20Hist%C3%B3rico%2C%20Porto%20Alegre%20-%20RS%2C%2090010-090!5e0!3m2!1spt-BR!2sbr!4v1793378570179!5m2!1spt-BR!2sbr"
+                width="400"
+                height="300"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="strict-origin-when-cross-origin"
+                className="h-[300px] w-full"
+              />
+            </div>
+
+            <div className="flex flex-col justify-center rounded-[1.1rem] border border-[#1A353C]/10 bg-[#F5F5F5] p-5 sm:p-6">
+              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#1A353C]/65">
+                Endereço
+              </p>
+              <p className="mt-4 text-base leading-7 text-[#1A353C] sm:text-lg">
+                Praça Pereira Parobé, 130 - Centro Histórico, Porto Alegre - RS, 90010-090
+              </p>
+
+              <a
+                href={instagramHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-6 inline-flex items-center justify-center gap-2 rounded-full bg-[#1A353C] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#244a52] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1A353C]/40 focus-visible:ring-offset-2"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  className="h-4 w-4 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <rect x="3.5" y="3.5" width="17" height="17" rx="5" />
+                  <circle cx="12" cy="12" r="4" />
+                  <circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none" />
+                </svg>
+                Seguir no Instagram
+              </a>
+            </div>
+          </div>
         </div>
 
         <div className="mx-auto mt-10 max-w-3xl rounded-[1.4rem] border border-[#1A353C]/10 bg-[#1A353C] px-5 py-6 text-center sm:px-8 sm:py-7">
