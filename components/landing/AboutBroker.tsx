@@ -52,8 +52,8 @@ export function AboutBroker() {
 
           <div className="mt-6 space-y-4 text-base leading-8 text-[#1A353C]/75">
             <p>
-              Com 17 anos de experiência no mercado de seguros, planos de saúde
-              e odontológicos, oferecemos atendimento personalizado para
+              Com 18 anos de experiência no mercado de Seguros, Planos de saúde
+              e Odontológicos, oferecemos atendimento personalizado para
               ajudar cada cliente a encontrar soluções adequadas ao seu perfil.
             </p>
             <p>
