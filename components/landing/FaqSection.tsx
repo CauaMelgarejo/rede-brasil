@@ -136,7 +136,7 @@ export function FaqSection() {
                 Endereço
               </p>
               <p className="mt-4 text-base leading-7 text-[#1A353C] sm:text-lg">
-                Praça Pereira Parobé, 130 - Centro Histórico, Porto Alegre - RS, 90010-090
+                Praça Pereira Parobé, 130, 6° andar, Sala 601 - Centro Histórico, Porto Alegre - RS, 90010-090
               </p>
 
               <a
