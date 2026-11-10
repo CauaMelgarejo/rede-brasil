@@ -41,32 +41,23 @@ export function AboutBroker() {
             id="about-broker-title"
             className="mt-5 text-3xl font-semibold leading-tight tracking-[-0.04em] text-[#1A353C] sm:text-4xl lg:text-5xl"
           >
-            18 anos de experiência no ramo de seguros, planos de saúde e
-            odontológico.
+            18 anos de experiência, confiança e compromisso com você.
           </h2>
 
           <p className="mt-5 text-lg leading-8 text-[#1A353C]/80 sm:text-xl">
-            Corretora de planos de saúde em Porto Alegre/RS com atendimento em
-            todo o Brasil, oferecendo orientação personalizada para pessoas
-            físicas e empresas.
+            Há 18 anos, a Rede Brasil atua no mercado de seguros, planos de
+            saúde e odontológicos, oferecendo soluções personalizadas para
+            pessoas, famílias e empresas.
           </p>
 
           <div className="mt-6 space-y-4 text-base leading-8 text-[#1A353C]/75">
             <p>
-              Com 18 anos de experiência no mercado de Seguros, Planos de saúde
-              e Odontológicos, a Rede Brasil atua com foco em soluções para
-              clientes de Porto Alegre e também para quem busca atendimento em
-              outras regiões do Brasil.
-            </p>
-            <p>
-              Nosso compromisso é entender suas necessidades, esclarecer dúvidas
-              e acompanhar você durante o processo de escolha e contratação,
-              com atenção, transparência e cuidado em cada etapa.
-            </p>
-            <p>
-              Mais do que apresentar opções, queremos construir uma relação de
-              confiança, oferecendo orientação próxima para que você encontre o
-              plano ideal com segurança e clareza.
+              Nossa missão é simplificar suas escolhas, apresentando opções das
+              principais operadoras do mercado, com orientação especializada,
+              transparência e atenção às suas necessidades. Mais do que
+              contratar um plano, você merece segurança para fazer a escolha
+              certa. Com sede em Porto Alegre/RS, oferecemos atendimento
+              personalizado para clientes de todo o Brasil.{" "}
             </p>
           </div>
 
@@ -77,7 +68,7 @@ export function AboutBroker() {
               rel={hasConfiguredPhone ? "noopener noreferrer" : undefined}
               className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-[#1A353C] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#244a52] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1A353C]/40 focus-visible:ring-offset-2"
             >
-              Fale com a corretora
+              Fale com a Especialista
               <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
             {!hasConfiguredPhone && (

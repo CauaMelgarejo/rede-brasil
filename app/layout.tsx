@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { SiteFooter } from "@/components/layout/SiteFooter";
+import { WhatsAppFloatingButton } from "@/components/layout/WhatsAppFloatingButton";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -10,6 +11,9 @@ export const metadata: Metadata = {
     "Corretora de planos de saúde em Porto Alegre/RS com atendimento em todo o Brasil. Compare opções para pessoas físicas e empresas e solicite uma cotação personalizada.",
   alternates: {
     canonical: "/",
+  },
+  icons: {
+    icon: "/images/logo.png",
   },
   openGraph: {
     title: "Planos de saúde em Porto Alegre e atendimento em todo o Brasil | Rede Brasil",
@@ -38,6 +42,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body className="min-h-full flex flex-col bg-[#F5F5F5] text-[#1A353C]">
         {children}
         <SiteFooter />
+        <WhatsAppFloatingButton />
       </body>
     </html>
   );

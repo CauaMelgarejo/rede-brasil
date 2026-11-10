@@ -18,7 +18,8 @@ import { faqItems } from "@/lib/faq";
 import type { PlanCardData } from "@/components/landing/PlanCard";
 
 export const metadata: Metadata = {
-  title: "Planos de saúde em Porto Alegre e atendimento em todo o Brasil | Rede Brasil",
+  title:
+    "Planos de saúde em Porto Alegre e atendimento em todo o Brasil | Rede Brasil",
   description:
     "Corretora de planos de saúde em Porto Alegre/RS com atendimento em todo o Brasil. Compare opções para pessoas físicas e empresas e solicite uma cotação personalizada.",
   alternates: {
@@ -243,21 +244,31 @@ export default function Home() {
               Porto Alegre / RS e atendimento nacional
             </p>
             <h1 className="max-w-135 text-4xl font-semibold leading-[1.08] tracking-[-0.04em] text-white sm:text-5xl lg:text-[4rem]">
-              Planos de saúde em Porto Alegre e atendimento em todo o Brasil
+              PLANOS DE SAÚDE PARA VOCÊ, SUA FAMÍLIA OU EMPRESA
             </h1>
 
             <p className="mt-6 max-w-152.5 text-xl leading-9 text-white/85">
-              A Rede Brasil ajuda pessoas físicas e empresas a encontrar planos de saúde
-              com cotação personalizada, orientação clara e atendimento em Porto Alegre/RS
-              e em todo o Brasil.
+              Encontre o plano ideal com quem entende do assunto. Compare opções
+              das principais operadoras do mercado e encontre a cobertura que
+              melhor atende às suas necessidades e ao seu orçamento. Conte com
+              uma consultoria especializada, atendimento personalizado e
+              orientação em cada etapa da contratação. Atendimento em Porto
+              Alegre e em todo o Brasil.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-4">
-              <Button href="/#planos" className="rounded-full px-7 py-4 text-base shadow-[0_18px_40px_rgba(26,53,60,0.28)]">
+              <Button
+                href="/#planos"
+                className="rounded-full px-7 py-4 text-base shadow-[0_18px_40px_rgba(26,53,60,0.28)]"
+              >
                 Solicitar cotação
               </Button>
 
-              <Button variant="secondary" href="/#planos" className="rounded-full border-white/35 bg-white/8 px-7 py-4 text-base text-white hover:bg-white/15">
+              <Button
+                variant="secondary"
+                href="/#planos"
+                className="rounded-full border-white/35 bg-white/8 px-7 py-4 text-base text-white hover:bg-white/15"
+              >
                 Conhecer os planos
               </Button>
             </div>

@@ -23,13 +23,13 @@ export function SiteHeader({ quoteHref = "/#planos" }: SiteHeaderProps) {
           aria-label="Rede Brasil — página inicial"
           className="flex items-center gap-3 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
         >
-          <div className="relative h-12 w-12 overflow-hidden rounded-full bg-white/10 ring-1 ring-white/20">
+          <div className="relative h-18 w-18 shrink-0 overflow-hidden rounded-full bg-white ring-1 ring-white/30">
             <Image
               src="/images/logo.png"
               alt=""
               fill
-              sizes="48px"
-              className="object-cover p-1"
+              sizes="72px"
+              className="rounded-full object-cover"
             />
           </div>
           <div className="leading-none text-white">
